@@ -7,6 +7,8 @@ import saladImage from './assets/ingridients/salad.png';
 import baconImage from './assets/ingridients/bacon.png';
 import { nanoid } from 'nanoid';
 import { count } from 'console';
+import Ingredient from './components/ingridients';
+// import BurgerComponent from './components/Burger/Burger';
 
 const App = () => {
   
@@ -30,23 +32,23 @@ const App = () => {
     setIngredients(updatedIngredients);
   };
 
-  const ingredientComponents = IngridientsArray.map((item, index) => (
-    <div className='ingredientComponent'>
-      <button className='ingButtons' key={item.id} onClick={() => handleIngredientClick(index)}>
-        <img className='img' src={item.image} />
-        {item.name}
-      </button>
-
-      <div className='counter'>
-        <span className='count'>({"x" + ingredients[index].count})</span>
-        <button className='deleteBtn' onClick={() => onDelete()} >X</button>
-      </div>
-    </div>
-  ));
-
   const onDelete = () => {
-    setIngredients(prevState => prevState.filter(count => (count.count-1) + 4))
+    setIngredients(prevState => prevState.filter(count => (count.count---1) + 4))
   };
+
+  // const ingredientComponents = IngridientsArray.map((item, index) => (
+  //   <div className='ingredientComponent'>
+  //     <button className='ingButtons' key={item.id} onClick={() => handleIngredientClick(index)}>
+  //       <img className='img' src={item.image} />
+  //       {item.name}
+  //     </button>
+
+  //     <div className='counter'>
+  //       <span className='count'>({"x" + ingredients[index].count})</span>
+  //       <button className='deleteBtn' onClick={() => onDelete()} >X</button>
+  //     </div>
+  //   </div>
+  // ));
 
    const addBurgerIngredients = [];
     for (let i = 0; i < ingredients.length; i++) {
@@ -56,9 +58,18 @@ const App = () => {
         );
       }
     }
+  
+  const ingredientComponents = IngridientsArray.map((item, index) => (
+   <Ingredient
+      key=  {item.id}
+      ingredient={item}
+      onClick={() => handleIngredientClick(index)}
+      onDelete={onDelete}
+    />
+  ));
 
 
-  return (
+   return (
     <div className='App'>
       <div className="container">
           <div className='leftBlock'>
