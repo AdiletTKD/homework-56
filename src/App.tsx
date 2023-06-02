@@ -31,18 +31,21 @@ const App = () => {
   };
 
   const ingredientComponents = IngridientsArray.map((item, index) => (
-    <div>
+    <div className='ingredientComponent'>
       <button className='ingButtons' key={item.id} onClick={() => handleIngredientClick(index)}>
         <img className='img' src={item.image} />
-        {item.name + " "}
+        {item.name}
       </button>
-      <span className='count'>({"x" + ingredients[index].count})</span>
-      <button className='deleteBtn'>X</button>
+
+      <div className='counter'>
+        <span className='count'>({"x" + ingredients[index].count})</span>
+        <button className='deleteBtn' onClick={() => onDelete()} >X</button>
+      </div>
     </div>
   ));
 
-  const onDelete = (id: string) => {
-    setIngredients(prevState => prevState.filter(count => count.count --- 1))
+  const onDelete = () => {
+    setIngredients(prevState => prevState.filter(count => (count.count-1) + 4))
   };
 
    const addBurgerIngredients = [];
